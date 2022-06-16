@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,5 +32,25 @@ public class MedicalController {
         model.addAttribute("listEndYear",iMedicalService.listEndYear());
         model.addAttribute("listNationality",iMedicalService.listNationality());
         return "/form-medical";
+    }
+
+    @PostMapping("/create")
+    public String create(@ModelAttribute Medical medical,Model model) {
+        model.addAttribute("name",medical.getName());
+        model.addAttribute("birthday",medical.getBirthday());
+        model.addAttribute("gender",medical.getGender());
+        model.addAttribute("nationality",medical.getNationality());
+        model.addAttribute("idNumber",medical.getIdNumber());
+        model.addAttribute("transport",medical.getTransport());
+        model.addAttribute("idTransport",medical.getIdTransport());
+        model.addAttribute("seats",medical.getSeats());
+        model.addAttribute("startDay",medical.getStartDay());
+        model.addAttribute("endDay",medical.getEndDay());
+        model.addAttribute("startMonth",medical.getStartMonth());
+        model.addAttribute("endMonth",medical.getEndMonth());
+        model.addAttribute("startYear",medical.getStartYear());
+        model.addAttribute("endYear",medical.getEndYear());
+        model.addAttribute("historyMove",medical.getHistoryMove());
+        return "/view";
     }
 }

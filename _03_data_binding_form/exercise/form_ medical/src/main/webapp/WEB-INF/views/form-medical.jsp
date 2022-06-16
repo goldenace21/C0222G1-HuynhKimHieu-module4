@@ -27,7 +27,7 @@
         <div class="row">
             <form:input cssStyle="width: 100%" path="name"/>
         </div>
-        <div class="row mt-3">
+        <div class="row mt-4">
             <div class="col-4">
                 <div class="row">
                     <p>Năm sinh<span style="color: red">(*)</span></p>
@@ -53,12 +53,98 @@
                     <p>Quốc tịch<span style="color: red">(*)</span></p>
                 </div>
                 <div class="row">
-                    <form:select cssStyle="width: 95%" path="nationality">
+                    <form:select cssStyle="width: 100%" path="nationality">
                         <form:options items="${listNationality}"></form:options>
                     </form:select>
                 </div>
             </div>
         </div>
+        <div class="row mt-4">
+            <p>Số hộ chiếu CMND hoặc giấy thông hành hợp pháp khác<span style="color: red">(*)</span></p>
+        </div>
+        <div class="row">
+            <form:input cssStyle="width: 100%" path="idNumber"/>
+        </div>
+        <div class="row mt-4">
+            <p>Thông tin đi lại<span style="color: red">(*)</span></p>
+        </div>
+        <div class="row">
+            <form:radiobuttons cssStyle="margin: 0 1em;" path="transport" items="${listTransport}"/>
+        </div>
+        <div class="row mt-4">
+            <div class="col-6">
+                <div class="row">
+                    <p>Số hiệu phương tiện<span style="color: red">(*)</span></p>
+                </div>
+                <div class="row">
+                    <form:input cssStyle="width: 95%" path="idTransport"/>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <p>Số ghế<span style="color: red">(*)</span></p>
+                </div>
+                <div class="row">
+                    <form:input cssStyle="width: 100%" path="seats"/>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-6">
+                <div class="row">
+                    <p>Ngày khởi hành<span style="color: red">(*)</span></p>
+                </div>
+                <div class="row">
+                    <div class="col-4 p-0">
+                        <form:select cssStyle="width: 90%" path="startDay">
+                            <form:options items="${listStartDay}"></form:options>
+                        </form:select>
+                    </div>
+                    <div class="col-4 p-0">
+                        <form:select cssStyle="width: 90%" path="startMonth">
+                            <form:options items="${listStartMonth}"></form:options>
+                        </form:select>
+                    </div>
+                    <div class="col-4 p-0">
+                        <form:select cssStyle="width: 90%" path="startYear">
+                            <form:options items="${listStartYear}"></form:options>
+                        </form:select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <p>Ngày kết thúc<span style="color: red">(*)</span></p>
+                </div>
+                <div class="row">
+                    <div class="col-4 p-0">
+                        <form:select cssStyle="width: 90%" path="endDay">
+                            <form:options items="${listEndDay}"></form:options>
+                        </form:select>
+                    </div>
+                    <div class="col-4 p-0">
+                        <form:select cssStyle="width: 90%" path="endMonth">
+                            <form:options items="${listEndMonth}"></form:options>
+                        </form:select>
+                    </div>
+                    <div class="col-4 p-0">
+                        <form:select cssStyle="width: 90%" path="endYear">
+                            <form:options items="${listEndYear}"></form:options>
+                        </form:select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <p>Trong vòng 14 ngày qua, Anh/chị có đến tỉnh/thành phố nào không<span style="color: red">(*)</span></p>
+        </div>
+        <div class="row">
+            <form:textarea cssStyle="width: 100%" path="historyMove"/>
+        </div>
+       <center>
+           <input class="mt-4" style="background: #17cc17; border-radius: 1em; border: none; color: #fff;" type="submit"
+                  value="Gửi tờ khai">
+       </center>
     </form:form>
 </div>
 </body>
@@ -69,14 +155,3 @@
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
         crossorigin="anonymous"></script>
 </html>
-<%--private String name;--%>
-<%--private String birthday;--%>
-<%--private boolean gender;--%>
-<%--private String nationality;--%>
-<%--private String idNumber;--%>
-<%--private String transport;--%>
-<%--private String idTransport;--%>
-<%--private String seats;--%>
-<%--private String startDay;--%>
-<%--private String endDay;--%>
-<%--private String historyMove;--%>
