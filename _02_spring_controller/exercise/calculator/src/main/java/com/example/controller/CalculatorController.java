@@ -19,7 +19,7 @@ public class CalculatorController {
 
     @GetMapping("/calculator")
     public String calculator(String number1, String number2, String operator, RedirectAttributes redirectAttributes) {
-        String result = iCalculatorService.caculator(number1, number2, operator);
+        String result = iCalculatorService.calculator(number1, number2, operator);
         redirectAttributes.addFlashAttribute("number1", number1);
         redirectAttributes.addFlashAttribute("number2", number2);
         redirectAttributes.addFlashAttribute("result", result);

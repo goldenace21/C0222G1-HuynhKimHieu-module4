@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class CalculatorImpl implements ICalculatorService {
 
     @Override
-    public String caculator(String number1, String number2, String operator) {
+    public String calculator(String number1, String number2, String operator) {
         String result = "";
         try {
             switch (operator) {
@@ -24,7 +24,7 @@ public class CalculatorImpl implements ICalculatorService {
                     result += division(number1, number2);
                     break;
             }
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             result = "NumberFormatException";
         }
         return result;
