@@ -141,10 +141,11 @@
         <div class="row">
             <form:textarea cssStyle="width: 100%" path="historyMove"/>
         </div>
-       <center>
-           <input class="mt-4" style="background: #17cc17; border-radius: 1em; border: none; color: #fff;" type="submit"
-                  value="Gửi tờ khai">
-       </center>
+        <center>
+            <input class="mt-4" style="background: #17cc17; border-radius: 1em; border: none; color: #fff;"
+                   type="submit"
+                   value="Gửi tờ khai">
+        </center>
     </form:form>
 </div>
 </body>

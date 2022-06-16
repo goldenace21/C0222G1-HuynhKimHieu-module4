@@ -20,37 +20,37 @@ public class MedicalController {
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("medical",new Medical());
-        model.addAttribute("listBirthDay",iMedicalService.listBirthDay());
-        model.addAttribute("listGender",iMedicalService.listGender());
-        model.addAttribute("listTransport",iMedicalService.listTransport());
-        model.addAttribute("listStartDay",iMedicalService.listStartDay());
-        model.addAttribute("listEndDay",iMedicalService.listEndDay());
-        model.addAttribute("listStartMonth",iMedicalService.listStartMonth());
-        model.addAttribute("listEndMonth",iMedicalService.listEndMonth());
-        model.addAttribute("listStartYear",iMedicalService.listStartYear());
-        model.addAttribute("listEndYear",iMedicalService.listEndYear());
-        model.addAttribute("listNationality",iMedicalService.listNationality());
+        model.addAttribute("medical", new Medical());
+        model.addAttribute("listBirthDay", iMedicalService.listBirthDay());
+        model.addAttribute("listGender", iMedicalService.listGender());
+        model.addAttribute("listTransport", iMedicalService.listTransport());
+        model.addAttribute("listStartDay", iMedicalService.listStartDay());
+        model.addAttribute("listEndDay", iMedicalService.listEndDay());
+        model.addAttribute("listStartMonth", iMedicalService.listStartMonth());
+        model.addAttribute("listEndMonth", iMedicalService.listEndMonth());
+        model.addAttribute("listStartYear", iMedicalService.listStartYear());
+        model.addAttribute("listEndYear", iMedicalService.listEndYear());
+        model.addAttribute("listNationality", iMedicalService.listNationality());
         return "/form-medical";
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute Medical medical,Model model) {
-        model.addAttribute("name",medical.getName());
-        model.addAttribute("birthday",medical.getBirthday());
-        model.addAttribute("gender",medical.getGender());
-        model.addAttribute("nationality",medical.getNationality());
-        model.addAttribute("idNumber",medical.getIdNumber());
-        model.addAttribute("transport",medical.getTransport());
-        model.addAttribute("idTransport",medical.getIdTransport());
-        model.addAttribute("seats",medical.getSeats());
-        model.addAttribute("startDay",medical.getStartDay());
-        model.addAttribute("endDay",medical.getEndDay());
-        model.addAttribute("startMonth",medical.getStartMonth());
-        model.addAttribute("endMonth",medical.getEndMonth());
-        model.addAttribute("startYear",medical.getStartYear());
-        model.addAttribute("endYear",medical.getEndYear());
-        model.addAttribute("historyMove",medical.getHistoryMove());
+    public String create(@ModelAttribute Medical medical, Model model) {
+        model.addAttribute("name", medical.getName());
+        model.addAttribute("birthday", medical.getBirthday());
+        model.addAttribute("gender", medical.getGender());
+        model.addAttribute("nationality", medical.getNationality());
+        model.addAttribute("idNumber", medical.getIdNumber());
+        model.addAttribute("transport", medical.getTransport());
+        model.addAttribute("idTransport", medical.getIdTransport());
+        model.addAttribute("seats", medical.getSeats());
+        model.addAttribute("startDay", medical.getStartDay());
+        model.addAttribute("endDay", medical.getEndDay());
+        model.addAttribute("startMonth", medical.getStartMonth());
+        model.addAttribute("endMonth", medical.getEndMonth());
+        model.addAttribute("startYear", medical.getStartYear());
+        model.addAttribute("endYear", medical.getEndYear());
+        model.addAttribute("historyMove", medical.getHistoryMove());
         return "/view";
     }
 }
