@@ -1,7 +1,7 @@
 package com.example.controller;
 
 import com.example.model.Product;
-import com.example.service.ProductSerive;
+import com.example.service.ProductServce;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ProductController {
 
     @Autowired
-    private ProductSerive productSerive;
+    private ProductServce productSerive;
 
     @GetMapping("/")
     public String goListProduct(Model model) {

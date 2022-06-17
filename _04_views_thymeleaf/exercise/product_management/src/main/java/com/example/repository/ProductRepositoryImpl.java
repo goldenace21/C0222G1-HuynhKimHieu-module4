@@ -7,6 +7,7 @@ import java.util.List;
 
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
+
     private static List<Product> products = new ArrayList<>();
 
     static {

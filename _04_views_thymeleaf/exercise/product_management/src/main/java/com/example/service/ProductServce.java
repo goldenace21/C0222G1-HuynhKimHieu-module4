@@ -4,7 +4,7 @@ import com.example.model.Product;
 
 import java.util.List;
 
-public interface ProductSerive {
+public interface ProductServce {
     List<Product> products();
 
     void addNew(Product product);
