@@ -17,6 +17,7 @@ public class ProductController {
 
     @GetMapping("/")
     public String goListProduct(Model model) {
+        model.addAttribute("product",new Product());
         model.addAttribute("products", productSerive.products());
         return "/list-product";
     }
@@ -58,8 +59,8 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public String search(String name, Model model) {
-        model.addAttribute("products", productSerive.searchByName(name));
+    public String search(Product product, Model model) {
+        model.addAttribute("products", productSerive.searchByName(product.getName()));
         return "/list-product";
     }
 }

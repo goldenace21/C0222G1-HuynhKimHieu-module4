@@ -28,8 +28,8 @@
 <a href="/create">
     <button>add new product</button>
 </a>
-<form action="/search">
-    search by name <input name="name">
+<form action="/search" th:object="${product}">
+    search by name <input th:field="*{name}">
     <input type="submit" value="search">
 </form>
 </body>
