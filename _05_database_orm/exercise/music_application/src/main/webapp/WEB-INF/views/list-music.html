@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>list music</title>
+</head>
+<body>
+<a href="/create">
+    <button>create new</button>
+</a>
+<table border="1px">
+    <tr>
+        <th>no</th>
+        <th>Name</th>
+        <th>Singer</th>
+        <th>Category</th>
+        <th>Play</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="music,loop : ${musics}">
+        <td th:text="${loop.count}"></td>
+        <td th:text="${music.name}"></td>
+        <td th:text="${music.singer}"></td>
+        <td th:text="${music.category}"></td>
+        <td>
+            <audio controls>
+                <source src="C:\Users\Admin\Documents\C0222G1-huynh_kim_hieu_M4\_05_database_orm\exercise\music_application\src\main\webapp\music\BinhYenNhungPhutGiay-SonTungMTP-4915711.mp3"
+                        type="audio/mpeg">
+            </audio>
+        </td>
+        <td><a th:href="@{/update/__${music.name}__}">
+            <button>update</button>
+        </a></td>
+        <td><a th:href="@{/delete/__${music.name}__}">
+            <button>delete</button>
+        </a></td>
+    </tr>
+</table>
+<form action="/search">
+    search by name <input type="text" name="name">
+    <input type="submit" value="search">
+</form>
+</body>
+</html>
