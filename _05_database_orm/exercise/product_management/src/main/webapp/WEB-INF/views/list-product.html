@@ -5,6 +5,32 @@
     <title>Title</title>
 </head>
 <body>
-
+<a href="/create">
+    <button>create new</button>
+</a>
+<table border="1px">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Info</th>
+        <th>Brand</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:if="${product.statusDelete == 0}" th:each="product,loop : ${products}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.info}"></td>
+        <td th:text="${product.brand}"></td>
+        <td><a th:href="@{/update/__${product.id}__}">
+            <button>update</button>
+        </a></td>
+        <td><a th:href="@{/delete/__${product.id}__}">
+            <button>delete</button>
+        </a></td>
+    </tr>
+</table>
 </body>
 </html>
