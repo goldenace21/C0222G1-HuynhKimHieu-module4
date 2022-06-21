@@ -5,12 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-<form th:object="${product}" action="/create" method="post">
-  Id product<input th:field="*{id}"><br>
+<form th:object="${product}" th:action="@{/create}" method="post">
+  <input type="hidden" th:field="*{id}"><br>
   Name product<input th:field="*{name}"><br>
   Price product<input th:field="*{price}"><br>
   Info product<input th:field="*{info}"><br>
   Brand product<input th:field="*{brand}"><br>
+    <input type="hidden" th:field="*{statusDelete}"><br>
 
   <button type="submit">create</button>
 </form>

@@ -31,23 +31,47 @@ public class Product {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPrice() {
         return price;
     }
 
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     public String getInfo() {
         return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public String getBrand() {
         return brand;
     }
 
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
     public int getStatusDelete() {
         return statusDelete;
+    }
+
+    public void setStatusDelete(int statusDelete) {
+        this.statusDelete = statusDelete;
     }
 }
