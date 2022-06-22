@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:object="${category}" action="/create-category" method="post">
+Category<input th:field="*{name}"><br>
+
+<button type="submit">create</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:object="${blog}" action="/update" method="post">
+    Id blog<input th:field="*{id}" readonly><br>
+    Title blog<input th:field="*{title}"><br>
+    content blog<textarea th:field="*{content}"></textarea><br>
+    Date create<input th:type="date" th:field="*{dateCreate}"><br>
+    Category<select th:field="*{category}">
+                <option th:each="item : ${categorys}" th:text="${item.name}" th:value="${item.id}"></option>
+            </select>
+
+    <button type="submit" value="update">update</button>
+</form>
+</body>
+</html>
