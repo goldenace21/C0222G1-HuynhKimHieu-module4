@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1px">
+    <tr>
+        <th>No</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Info</th>
+        <th>Brand</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="product,loop : ${products}">
+        <td th:text="${loop.count}"></td>
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.info}"></td>
+        <td th:text="${product.brand}"></td>
+        <td><a th:href="@{/update/__${product.id}__}">edit</a></td>
+        <td><a th:href="@{/delete/__${product.id}__}">delete</a></td>
+    </tr>
+</table>
+<a href="/create">
+    <button>add new product</button>
+</a>
+<form action="/search" th:object="${product}">
+    search by name <input th:field="*{name}">
+    <input type="submit" value="search">
+</form>
+</body>
+</html>

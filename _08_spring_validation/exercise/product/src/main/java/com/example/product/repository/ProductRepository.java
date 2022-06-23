@@ -17,5 +17,11 @@ public interface ProductRepository  extends JpaRepository<Product, Integer> {
     @Query(value = "update product set status_delete = 1 where id = :id", nativeQuery = true)
     public void deleteById(@Param("id") Integer id);
 
-    public List<>
+    @Modifying
+    @Query(value = "select * from product where status_delete = 0", nativeQuery = true)
+    public List<Product> findAll();
+
+    @Modifying
+    @Query(value = "select * from product where name like %:name%", nativeQuery = true)
+    public List<Product> findAllByName(@Param("name") String name);
 }
