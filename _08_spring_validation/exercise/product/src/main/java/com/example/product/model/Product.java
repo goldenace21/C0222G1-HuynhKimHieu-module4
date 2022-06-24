@@ -1,6 +1,7 @@
 package com.example.product.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 @Entity(name = "product")
 public class Product {
@@ -8,10 +9,19 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "int")
     private Integer id;
+
+    @Pattern(regexp = "^[\\w\\s]{1,30}$")
     private String name;
+
+    @Pattern(regexp = "^[0-9]+\\.?[0-9]*$")
     private String price;
+
+    @Pattern(regexp = "^[\\w\\s]{1,30}$")
     private String info;
+
+    @Pattern(regexp = "^[\\w\\s]{1,30}$")
     private String brand;
+
     @Column(name = "status_delete")
     private int statusDelete;
 

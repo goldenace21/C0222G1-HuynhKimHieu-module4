@@ -6,11 +6,14 @@
 </head>
 <body>
 <form th:object="${product}" action="/create" method="post">
-    Id product<input th:field="*{id}"><br>
     Name product<input th:field="*{name}"><br>
+    <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
     Price product<input th:field="*{price}"><br>
+    <p style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
     Info product<input th:field="*{info}"><br>
+    <p style="color: red" th:if="${#fields.hasErrors('info')}" th:errors="*{info}"></p>
     Brand product<input th:field="*{brand}"><br>
+    <p style="color: red" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"></p>
 
     <button type="submit">create</button>
 </form>

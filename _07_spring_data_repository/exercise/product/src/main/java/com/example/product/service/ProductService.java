@@ -1,20 +1,17 @@
 package com.example.product.service;
 
-import com.example.model.Product;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
+import com.example.product.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface ProductService {
-    List<Product> products();
+    Page<Product> products(Pageable pageable, String name);
 
     void addNew(Product product);
 
     void update(Product product);
 
-    void delete(Product product);
+    void deleteById(Integer id);
 
-    List<Product> searchByName(String name);
-
-    Product detail(String id);
+    Product findById(Integer id);
 }
