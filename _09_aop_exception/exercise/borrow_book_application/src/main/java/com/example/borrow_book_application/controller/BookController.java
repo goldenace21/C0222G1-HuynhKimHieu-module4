@@ -22,13 +22,13 @@ public class BookController {
 
     @GetMapping("/")
     public String goList(Model model) {
-        model.addAttribute("books",bookService.findAll());
+        model.addAttribute("books", bookService.findAll());
         return "/list";
     }
 
     @GetMapping("/borrow/{id}")
     public String borrowBook(@PathVariable Integer id, Model model) {
-        if(bookService.updateDown(id) != null) {
+        if (bookService.updateDown(id) != null) {
             return "/error";
         }
         String random = "" + ThreadLocalRandom.current().nextInt(9999, 100000 + 1);
