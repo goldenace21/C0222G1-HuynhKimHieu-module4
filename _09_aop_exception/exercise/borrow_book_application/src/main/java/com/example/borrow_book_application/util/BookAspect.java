@@ -24,6 +24,6 @@ public class BookAspect {
     @After("allControllerPointCut()")
     public void countVisitor() {
         System.out.println("------------------");
-        System.err.println("The number of visitor = " + countVisitor++);
+        System.err.println("The number of visitor = " + ++countVisitor);
     }
 }
