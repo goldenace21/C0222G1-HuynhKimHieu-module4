@@ -65,6 +65,7 @@
     <span>
         <a th:if="${products.hasNext()}" th:href="@{/(page = ${products.number +1},name = ${namee})}">Next</a>
     </span>
+    
 <form th:action="@{/delete}" method="get">
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">

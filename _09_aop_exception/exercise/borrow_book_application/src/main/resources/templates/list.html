@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/give-back">
+    <input name="code" type="text">
+    <input type="submit" value="give back book">
+</form>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Publication date</th>
+        <th>quantity</th>
+        <th>Borrow</th>
+    </tr>
+    <tr th:each="item : ${books}">
+        <td th:text="${item.id}"></td>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.author}"></td>
+        <td th:text="${item.publicationDate}"></td>
+        <td th:text="${item.quantity}"></td>
+        <td>
+            <a th:href="@{/borrow/__${item.id}__}">
+                <button>borrow</button>
+            </a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

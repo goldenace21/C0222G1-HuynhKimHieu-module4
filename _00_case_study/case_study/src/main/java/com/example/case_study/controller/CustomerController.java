@@ -9,6 +9,6 @@ public class CustomerController {
 
     @GetMapping("/list-customer")
     public String goList(Model model) {
-        return "/list-customer";
+        return "/customer/list-customer";
     }
 }
