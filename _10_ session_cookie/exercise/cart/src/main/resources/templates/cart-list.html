@@ -15,7 +15,7 @@
             <th>Quantity</th>
             <th>Price</th>
         </tr>
-        <tr th:each="product: ${cart.products}">
+        <tr th:each="product: ${cart.getMap()}">
             <td th:text="${product.getKey().name}"></td>
             <td>
                 <a id="decrease_button" th:text="${'-'}"></a>

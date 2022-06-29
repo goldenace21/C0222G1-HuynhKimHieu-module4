@@ -7,14 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 @Controller
-@SessionAttributes("cardList")
+@SessionAttributes("cart")
 public class ProductController {
 
     @Autowired
@@ -34,14 +30,14 @@ public class ProductController {
             return "/error";
         }
         if (action.equals("show")) {
-//            cart.addProduct(product.get());
+            cart.addProduct(product.get());
             return "redirect:/cart-list";
         }
         cart.addProduct(product.get());
-        return "redirect:/list";
+        return "redirect:/";
     }
 
-    @RequestMapping("/")
+    @RequestMapping("")
     public String goListProduct(Model model) {
         model.addAttribute("items",productService.findAll());
         return "list";
