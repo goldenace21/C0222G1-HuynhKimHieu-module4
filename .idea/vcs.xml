@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_03_data_binding_form/practice/form_data_binding/spring_mvc_form_tutorial" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_10_ session_cookie/exercise/spring-shopping-cart" vcs="Git" />
   </component>
 </project>
