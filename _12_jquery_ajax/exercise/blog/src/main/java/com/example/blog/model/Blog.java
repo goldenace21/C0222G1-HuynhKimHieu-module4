@@ -19,7 +19,7 @@ public class Blog {
     private Category category;
 
     public Blog() {
-        
+
     }
 
     public Blog(Integer id, String title, String content, String dateCreate) {

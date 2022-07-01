@@ -1,5 +1,8 @@
 package com.example.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,6 +16,8 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category")
+//    @JsonBackReference(value = "blog")
+    @JsonIgnore
     private Set<Blog> blogs;
 
     public Category() {

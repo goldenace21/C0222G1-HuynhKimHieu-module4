@@ -16,13 +16,23 @@ public class BlogServiceImpl implements BlogService {
     private BlogRepository repository;
 
     @Override
-    public Page<Blog> findAllBlog(Pageable pageable, int id) {
-        return repository.findAllBlog(pageable, id);
+    public List<Blog> findAllBlog() {
+        return repository.findAllBlog();
+    }
+
+    @Override
+    public List<Blog> findAllByTitle(String title) {
+        return repository.findAllByTitleContaining(title);
     }
 
     @Override
     public void create(String title, String content, String dateCreate) {
         repository.create(title, content, dateCreate);
+    }
+
+    @Override
+    public void save(Blog blog) {
+        repository.save(blog);
     }
 
     @Override
@@ -40,4 +50,8 @@ public class BlogServiceImpl implements BlogService {
         return repository.findById(id).get();
     }
 
+    @Override
+    public Page<Blog> findAllByCategory(Pageable pageable, String category) {
+        return repository.findAllByCategory(pageable, category);
+    }
 }

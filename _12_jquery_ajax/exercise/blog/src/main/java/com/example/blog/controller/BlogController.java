@@ -4,12 +4,11 @@ import com.example.blog.model.Blog;
 import com.example.blog.service.BlogService;
 import com.example.blog.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class BlogController {
@@ -20,12 +19,9 @@ public class BlogController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping("")
-    public String goListBlog(@RequestParam(name = "page", defaultValue = "0") int page,
-                             @RequestParam(name = "cate", defaultValue = "1") int cate,
-                             Model model) {
-        Sort sort = Sort.by("date_create").ascending();
-        Page<Blog> blogs = blogService.findAllBlog(PageRequest.of(page, 2, sort), cate);
+    @RequestMapping("/")
+    public String goListBlog(Model model) {
+        List<Blog> blogs = blogService.findAllBlog();
         model.addAttribute("blogs", blogs);
         model.addAttribute("categorys", categoryService.findAll());
         return "/list";

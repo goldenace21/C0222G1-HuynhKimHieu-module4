@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -16,8 +17,8 @@ public interface BlogRepository extends JpaRepository<Blog, Integer> {
 
     // @Modifying cho method thay đổi data trong database
 
-    @Query(value = "select * from blog where category_id = :id", nativeQuery = true)
-    Page<Blog> findAllBlog(Pageable pageable, @Param("id") int id);
+    @Query(value = "select * from blog", nativeQuery = true)
+    List<Blog> findAllBlog();
 
     @Modifying
     @Query(value = "insert into blog(title,content,date_create) value (:title, :content, :date_create)", nativeQuery = true)
@@ -33,4 +34,8 @@ public interface BlogRepository extends JpaRepository<Blog, Integer> {
     @Modifying
     @Query(value = "UPDATE blog set delete_status = 1 where id = :id", nativeQuery = true)
     void deleteById(@Param("id") Integer id);
+
+    Page<Blog> findAllByCategory(Pageable pageable, String category);
+
+    List<Blog> findAllByTitleContaining(String title);
 }
