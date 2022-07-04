@@ -5,55 +5,144 @@
     <title>Title</title>
 </head>
 <body>
-<div th:replace="furama.html :: header">
-</div>
+<div th:replace="furama.html :: header"></div>
 <div class="container-fluid bg">
     <div class="container">
         <div class="row">
-            <h2 class="mx-auto my-4">
-                <em>
-                    Customer management
-                </em>
-            </h2>
+            <h2 class="mx-auto my-4"><em>Customer management</em></h2>
         </div>
-        <div class="row" style="justify-content: space-between">
+        <div class="row d-flex justify-content-between">
             <div>
-                <button type="button" class="btn btn-outline-primary btn-sm">add new customer</button>
+                <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#create">add new customer</button>
+
+                <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div style="background: rgba(0,0,0,0)" class="modal-content">
+                            <div class="modal-header d-flex justify-content-center bg-purple">
+                                <h6 class="modal-title text-light" id="exampleModalLabel">Customer form</h6>
+                            </div>
+                            <div class="modal-body bg-white rounded-bottom">
+                                <form id="create-customer">
+                                    <div class="row d-flex justify-content-around mb-3">
+                                        <div class="col-6 pr-0">
+                                            <input id="idCustomer" type="text" placeholder="enter id customer" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-6">
+                                            <input id="name" type="text" placeholder="enter name" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex justify-content-around my-3">
+                                        <div class="col-12">
+                                            <input id="birthday" type="date" placeholder="enter birthday" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex justify-content-around my-3">
+                                        <div class="col-6">
+                                            <input id="idCard" type="text" placeholder="enter id card" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-6 pl-0">
+                                            <input id="phoneNumber" type="text" placeholder="enter phone number" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex justify-content-around">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <select class="form-control form-control-sm" id="gender">
+                                                    <option th:value="${true}">male</option>
+                                                    <option th:value="${false}">female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex justify-content-around">
+                                        <div class="col-6 pr-0">
+                                            <input id="email" type="text" placeholder="enter email" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-6">
+                                            <input id="address" type="text" placeholder="enter address" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex justify-content-around mt-3">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <select class="form-control form-control-sm" id="idType">
+                                                    <option th:each="customerType : ${customerTypes}" th:value="${customerType.customerTypeId}" th:text="${customerType.customerTypeName}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex justify-content-around">
+                                        <div class="col-12">
+                                            <input style="width: 100%" type="submit" onclick="createCustomer()" value="submit" class="btn btn-sm bg-purple text-light">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div>
-                <div class="input-group input-group-sm mb-3">
-                    <input style="background: rgba(0,0,0,0)" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Small">
-                    <button type="button" class="btn btn-outline-success btn-sm">search</button>
-                </div>
+                <form id="search-customer" class="input-group input-group-sm mb-3">
+                    <input id="search-name" style="background: rgba(0,0,0,0)" class="form-control mr-sm-2" type="search" placeholder="Search by name" aria-label="Small">
+                    <input type="button" onclick="searchCustomer()" value="search" class="btn btn-outline-success btn-sm">
+                </form>
             </div>
         </div>
         <div class="row my-3">
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delele</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Birthday</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Id card</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td><button type="button" class="btn btn-outline-info btn-sm">edit</button></td>
-                    <td><button type="button" class="btn btn-outline-danger btn-sm">delete</button></td>
+                <tbody id="customer-list">
+                <tr th:each="customer : ${customers}">
+                    <td th:text="${customer.idCustomer}"></td>
+                    <td th:text="${customer.name}"></td>
+                    <td th:text="${customer.birthday}"></td>
+                    <td th:if="${customer.gender == true}" th:text="male"></td>
+                    <td th:if="${customer.gender == false}" th:text="female"></td>
+                    <td th:text="${customer.idCard}"></td>
+                    <td th:text="${customer.phoneNumber}"></td>
+                    <td th:text="${customer.address}"></td>
+                    <td th:text="${customer.customerType.customerTypeName}"></td>
+                    <td><a th:href="${customer.id}" class="editCustomer"><button  type="button" class="btn btn-outline-info btn-sm">update</button></a></td>
+                    <td><a th:href="${customer.id}" class="deleteCustomer"><button  type="button" class="btn btn-outline-danger btn-sm">delete</button></a></td>
                 </tr>
                 </tbody>
             </table>
         </div>
+        <div class="row justify-content-end">
+            <div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination-sm">
+                        <li class="page-item">
+                            <a style="background: rgba(0,0,0,0)" class="page-link text-info" th:if="${customers.hasPrevious()}" th:href="@{/rest-customer/(page = ${customers.number - 1},name = ${name})}">Previous</a>
+                        </li>
+                        <li class="page-item" th:each="pageNo: ${#numbers.sequence(0,customers.totalPages - 1)}">
+                            <a style="background: rgba(0,0,0,0)" class="page-link text-info" th:href="@{/rest-customer/(page = ${pageNo},name = ${name})}" th:text="${pageNo}"></a>
+                        </li>
+                        <li class="page-item">
+                            <a style="background: rgba(0,0,0,0)" class="page-link text-info" th:if="${customers.hasNext()}" th:href="@{/rest-customer/(page = ${customers.number +1},name = ${name})}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
 </div>
-<div th:replace="furama.html :: script">
-</div>
+<div th:replace="furama.html :: script"></div>
 </body>
+<script src="customer.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </html>

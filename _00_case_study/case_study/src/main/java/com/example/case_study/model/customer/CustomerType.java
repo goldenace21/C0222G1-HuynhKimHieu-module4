@@ -1,5 +1,7 @@
 package com.example.case_study.model.customer;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -10,10 +12,11 @@ public class CustomerType {
     @Column(name = "customer_type_id", columnDefinition = "int")
     private Integer customerTypeId;
 
-    @Column(name = "customer_type_name", columnDefinition = "int")
+    @Column(name = "customer_type_name")
     private String customerTypeName;
 
     @OneToMany(mappedBy = "customerType")
+    @JsonIgnore
     private Set<Customer> customers;
 
     public CustomerType() {

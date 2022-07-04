@@ -1,14 +1,18 @@
 package com.example.case_study.model.customer;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 @Entity(name = "customer")
 public class Customer{
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idAuto;
     @Id
-    private String id;
-    private String type;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Pattern(regexp = "^(KH-)[\\d]{4}$")
+    @Column(unique = true)
+    private String idCustomer;
+
     private String name;
     @Column(name = "birthday", columnDefinition = "date")
     private String birthday;
@@ -17,6 +21,7 @@ public class Customer{
     private String phoneNumber;
     private String email;
     private String address;
+    @Column(columnDefinition = "int default 0")
     private Integer deleteStatus;
 
     @ManyToOne(targetEntity = CustomerType.class)
@@ -25,28 +30,20 @@ public class Customer{
 
     public Customer() {}
 
-    public Integer getIdAuto() {
-        return idAuto;
-    }
-
-    public void setIdAuto(Integer idAuto) {
-        this.idAuto = idAuto;
-    }
-
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getIdCustomer() {
+        return idCustomer;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setIdCustomer(String idCustomer) {
+        this.idCustomer = idCustomer;
     }
 
     public String getName() {
@@ -105,19 +102,19 @@ public class Customer{
         this.address = address;
     }
 
-    public CustomerType getCustomerType() {
-        return customerType;
-    }
-
-    public void setCustomerType(CustomerType customerType) {
-        this.customerType = customerType;
-    }
-
     public Integer getDeleteStatus() {
         return deleteStatus;
     }
 
     public void setDeleteStatus(Integer deleteStatus) {
         this.deleteStatus = deleteStatus;
+    }
+
+    public CustomerType getCustomerType() {
+        return customerType;
+    }
+
+    public void setCustomerType(CustomerType customerType) {
+        this.customerType = customerType;
     }
 }

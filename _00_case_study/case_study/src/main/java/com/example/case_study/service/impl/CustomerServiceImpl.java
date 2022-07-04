@@ -24,7 +24,15 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteById(Integer idAuto) {
-        customerRepository.deleteById(idAuto);
+    public void deleteById(Integer id) {
+        customerRepository.deleteById(id);
+    }
+
+    @Override
+    public void save(Customer customer) {customerRepository.save(customer);}
+
+    @Override
+    public Page<Customer> findAllByNameContaining(Pageable pageable, String name) {
+        return customerRepository.findAllByNameContaining(pageable, name);
     }
 }

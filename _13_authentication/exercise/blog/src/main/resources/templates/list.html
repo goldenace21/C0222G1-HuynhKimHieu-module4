@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+<script>
+    function search() {
+        let title = $('#title').val();
+        $.ajax({
+            type: "GET",
+            url: `/blog/${title}`,
+            success: function (data) {
+                if (data == undefined) {
+                    data = {}
+                }
+                let content = '    <tr>\n' +
+                    '        <td>Id</td>\n' +
+                    '        <td>Title</td>\n' +
+                    '        <td>Create date</td>\n' +
+                    '        <td>Category</td>\n' +
+                    '        <td>Update</td>\n' +
+                    '        <td>Delete</td>\n' +
+                    '    </tr>';
+                for (let i = 0; i < data.length; i++) {
+                    content += getBlog(data[i]);
+                }
+                document.getElementById('listBlog').innerHTML = content;
+            }
+        });
+        event.preventDefault();
+    }
+
+    function getBlog(blog) {
+        return `<tr><td>${blog.id}</td><td >${blog.title}</td><td >${blog.dateCreate}</td><td >${blog.category.name}</td>` +
+            `<td><a class="update" href="${blog.id}"><button>update</button></a></td>` +
+            `<td><a class="delete" href="${blog.id}"><button>delete</button></a></td>`;
+    }
+</script>
+<a href="/create">
+    <button>create new blog</button>
+</a>
+<a href="/list-category">
+    <button>list category</button>
+</a>
+<form id="search">
+    <input type="text" id="title" placeholder="search by title">
+    <input type="submit" value="search" onclick="search()">
+</form>
+<input type="submit" value="more" onclick="more()">
+
+<table id="listBlog">
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Create date</th>
+        <th>Category</th>
+        <th th:if="${#request.userPrincipal != null}">Update</th>
+        <th th:if="${#request.userPrincipal != null}">Delete</th>
+    </tr>
+    <tr th:each="blog : ${blogs}">
+        <td th:text="${blog.id}"></td>
+        <td th:text="${blog.title}"></td>
+        <td th:text="${blog.dateCreate}"></td>
+        <td th:text="${blog.category.getName()}"></td>
+        <td><a th:if="${#request.userPrincipal != null}" class="update" th:href="@{/update/__${blog.id}__}">
+            <button>update</button>
+        </a></td>
+        <td><a th:if="${#request.userPrincipal != null}" class="delete" th:href="@{/delete/__${blog.id}__}">
+            <button>delete</button>
+        </a></td>
+    </tr>
+</table>
+<a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
+</body>
+</html>

@@ -9,5 +9,9 @@ public interface CustomerService {
 
     void edit(Customer customer);
 
-    void deleteById(Integer idAuto);
+    void deleteById(Integer id);
+
+    void save(Customer customer);
+
+    Page<Customer> findAllByNameContaining(Pageable pageable, String name);
 }

@@ -19,4 +19,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     @Query(value = "select * from customer where delete_status = 0 and name like %:name%", nativeQuery = true)
     Page<Customer> findAll(Pageable pageable, @Param("name") String name);
+
+    Page<Customer> findAllByNameContaining(Pageable pageable,String name);
 }
