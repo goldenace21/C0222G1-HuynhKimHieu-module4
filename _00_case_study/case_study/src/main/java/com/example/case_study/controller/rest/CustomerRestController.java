@@ -24,21 +24,18 @@ public class CustomerRestController {
 
     @GetMapping
     public ResponseEntity<Page<Customer>> allCustomer(
+            @RequestParam(name = "name", defaultValue = "") String name,
             @RequestParam(name = "page", defaultValue = "0") int page) {
         Page<Customer> pageCustomer;
-        pageCustomer = customerService.findAll(PageRequest.of(page, 5), "");
+        pageCustomer = customerService.findAll(PageRequest.of(page, 5), name);
         return new ResponseEntity<>(pageCustomer, HttpStatus.OK);
     }
 
-    @GetMapping("/{name}")
-    public ResponseEntity<Page<Customer>> findAllByName(@PathVariable(name = "name") String name,
-                                                        @RequestParam(name = "page", defaultValue = "0") int page) {
-        if(name == null) {
-            name = "";
-        }
-        Page<Customer> pageCustomer;
-        pageCustomer = customerService.findAllByNameContaining(PageRequest.of(page, 5), name);
-        return new ResponseEntity<>(pageCustomer, HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity<Customer> findById(@PathVariable(name = "id") Integer id) {
+        Customer customer;
+        customer = customerService.findById(id).get();
+        return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
     @PostMapping
@@ -57,5 +54,14 @@ public class CustomerRestController {
             errors.put(fieldName, errorMessage);
         });
         return errors;
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Customer> deleteCustomer(@PathVariable(name = "id")Integer id) {
+        Customer customer;
+        customer = customerService.findById(id).get();
+        customer.setDeleteStatus(1);
+        customerService.save(customer);
+        return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 }

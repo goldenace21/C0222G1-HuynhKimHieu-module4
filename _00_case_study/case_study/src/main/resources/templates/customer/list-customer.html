@@ -13,7 +13,7 @@
         </div>
         <div class="row d-flex justify-content-between">
             <div>
-                <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#create">add new customer</button>
+                <button id="modal" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#create">add new customer</button>
 
                 <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -23,6 +23,7 @@
                             </div>
                             <div class="modal-body bg-white rounded-bottom">
                                 <form id="create-customer">
+                                    <input type="hidden" id="id" placeholder="id">
                                     <div class="row d-flex justify-content-around mb-3">
                                         <div class="col-6 pr-0">
                                             <input id="idCustomer" type="text" placeholder="enter id customer" class="form-control form-control-sm">
@@ -116,8 +117,10 @@
                     <td th:text="${customer.phoneNumber}"></td>
                     <td th:text="${customer.address}"></td>
                     <td th:text="${customer.customerType.customerTypeName}"></td>
-                    <td><a th:href="${customer.id}" class="editCustomer"><button  type="button" class="btn btn-outline-info btn-sm">update</button></a></td>
-                    <td><a th:href="${customer.id}" class="deleteCustomer"><button  type="button" class="btn btn-outline-danger btn-sm">delete</button></a></td>
+                    <td><button th:href="${customer.id}" type="button" class="btn btn-outline-info btn-sm editCustomer">update</button></td>
+                    <td>
+                        <button th:data-id="${customer.id}" th:data-name="${customer.name}" th:onclick="|info(this.getAttribute('data-id'),this.getAttribute('data-name'))|" type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#delete">delete</button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -141,8 +144,54 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div style="background: rgba(0,0,0,0)" class="modal-content">
+            <div class="modal-header d-flex justify-content-center bg-purple">
+                <h6 class="modal-title text-light">Confirm</h6>
+            </div>
+            <div class="modal-body bg-white rounded-bottom">
+                <div class="row">
+                    <input type="hidden" id="delete-id">
+                    delete customer: <span id="delete-name"></span>
+                </div>
+                <div class="row d-flex justify-content-around">
+                    <div class="col-3 pr-0">
+                        <input style="width: 100%" type="button" data-dismiss="modal" value="close" class="btn btn-sm bg-secondary text-light">
+                    </div>
+                    <div class="col-9">
+                        <input style="width: 100%" type="button" value="delete" class="btn btn-sm bg-purple text-light deleteCustomer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div th:replace="furama.html :: script"></div>
 </body>
-<script src="customer.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="/customer.js"></script>
+
+<script>
+    function info(id, name) {
+        console.log(name)
+        document.getElementById("delete-id").value = id;
+        document.getElementById("delete-name").innerHTML = name;
+    }
+    $(document).ready(function () {
+        $("#delete").on("click", ".deleteCustomer", function (event) {
+            let id = $('#delete-id').val();
+            $.ajax({
+                type: "DELETE",
+                url: `/rest-customer/${id}`,
+                success: function (data) {
+                    successHandler()
+                    $('#delete').modal('hide')
+                    document.getElementById("delete-id").value = ""
+                    document.getElementById("delete-name").innerText = ""
+                }
+            });
+        });
+    })
+</script>
 </html>
