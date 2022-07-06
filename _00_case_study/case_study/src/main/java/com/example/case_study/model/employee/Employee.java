@@ -17,6 +17,7 @@ public class Employee {
     private String salary;
     private String email;
     private String address;
+    private Integer deleteStatus;
 
     @ManyToOne(targetEntity = Division.class)
     @JoinColumn(name = "division_id")
@@ -131,5 +132,13 @@ public class Employee {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Integer getDeleteStatus() {
+        return deleteStatus;
+    }
+
+    public void setDeleteStatus(Integer deleteStatus) {
+        this.deleteStatus = deleteStatus;
     }
 }

@@ -13,7 +13,7 @@
         </div>
         <div class="row d-flex justify-content-between">
             <div>
-                <button id="modal" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#create">add new customer</button>
+                <button id="modal" type="button" class="btn btn-outline-primary btn-sm" onclick="clearInput()" data-toggle="modal" data-target="#create">add new customer</button>
 
                 <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -31,6 +31,7 @@
                                         <div class="col-6">
                                             <input id="name" type="text" placeholder="enter name" class="form-control form-control-sm">
                                         </div>
+                                        <p id="id-error"></p>
                                     </div>
                                     <div class="row d-flex justify-content-around my-3">
                                         <div class="col-12">
@@ -130,13 +131,13 @@
                 <nav aria-label="Page navigation example">
                     <ul class="pagination pagination-sm">
                         <li class="page-item">
-                            <a style="background: rgba(0,0,0,0)" class="page-link text-info" th:if="${customers.hasPrevious()}" th:href="@{/rest-customer/(page = ${customers.number - 1},name = ${name})}">Previous</a>
+                            <a style="background: rgba(0,0,0,0)" class="page-link text-info" th:if="${customers.hasPrevious()}" th:href="@{/customer/(page = ${customers.number - 1},name = ${name})}">Previous</a>
                         </li>
                         <li class="page-item" th:each="pageNo: ${#numbers.sequence(0,customers.totalPages - 1)}">
-                            <a style="background: rgba(0,0,0,0)" class="page-link text-info" th:href="@{/rest-customer/(page = ${pageNo},name = ${name})}" th:text="${pageNo}"></a>
+                            <a style="background: rgba(0,0,0,0)" class="page-link text-info" th:href="@{/customer/(page = ${pageNo},name = ${name})}" th:text="${pageNo}"></a>
                         </li>
                         <li class="page-item">
-                            <a style="background: rgba(0,0,0,0)" class="page-link text-info" th:if="${customers.hasNext()}" th:href="@{/rest-customer/(page = ${customers.number +1},name = ${name})}">Next</a>
+                            <a style="background: rgba(0,0,0,0)" class="page-link text-info" th:if="${customers.hasNext()}" th:href="@{/customer/(page = ${customers.number +1},name = ${name})}">Next</a>
                         </li>
                     </ul>
                 </nav>
@@ -151,11 +152,13 @@
                 <h6 class="modal-title text-light">Confirm</h6>
             </div>
             <div class="modal-body bg-white rounded-bottom">
-                <div class="row">
-                    <input type="hidden" id="delete-id">
-                    delete customer: <span id="delete-name"></span>
-                </div>
                 <div class="row d-flex justify-content-around">
+                    <input type="hidden" id="delete-id">
+                    <div class="mb-2">
+                        delete customer: <span id="delete-name"></span>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-around mt-2">
                     <div class="col-3 pr-0">
                         <input style="width: 100%" type="button" data-dismiss="modal" value="close" class="btn btn-sm bg-secondary text-light">
                     </div>
@@ -169,29 +172,5 @@
 </div>
 <div th:replace="furama.html :: script"></div>
 </body>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="/customer.js"></script>
-
-<script>
-    function info(id, name) {
-        console.log(name)
-        document.getElementById("delete-id").value = id;
-        document.getElementById("delete-name").innerHTML = name;
-    }
-    $(document).ready(function () {
-        $("#delete").on("click", ".deleteCustomer", function (event) {
-            let id = $('#delete-id').val();
-            $.ajax({
-                type: "DELETE",
-                url: `/rest-customer/${id}`,
-                success: function (data) {
-                    successHandler()
-                    $('#delete').modal('hide')
-                    document.getElementById("delete-id").value = ""
-                    document.getElementById("delete-name").innerText = ""
-                }
-            });
-        });
-    })
-</script>
 </html>

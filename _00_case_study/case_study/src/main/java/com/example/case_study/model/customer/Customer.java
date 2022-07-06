@@ -9,7 +9,7 @@ public class Customer{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Pattern(regexp = "^(KH-)[\\d]{4}$")
+    @Pattern(regexp = "^(KH-)[\\d]{4}$",message = "error format")
     @Column(unique = true)
     private String idCustomer;
 

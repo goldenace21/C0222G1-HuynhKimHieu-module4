@@ -22,7 +22,7 @@ public class CustomerController {
     @Autowired
     private CustomerTypeService customerTypeService;
 
-    @GetMapping("")
+    @GetMapping
     public String goList(@RequestParam(name = "page", defaultValue = "0") int page,
                          @RequestParam(name = "name", defaultValue = "") String name,
                          Model model) {
@@ -30,6 +30,6 @@ public class CustomerController {
         model.addAttribute("customers", customers);
         model.addAttribute("customerTypes", customerTypeService.findAll());
         model.addAttribute("name", name);
-        return "/customer/list-customer";
+        return "/list-customer";
     }
 }

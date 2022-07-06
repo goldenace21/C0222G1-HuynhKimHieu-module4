@@ -1,15 +1,5 @@
 
 function createCustomer() {
-    document.getElementById("id").value = ""
-    document.getElementById("idCustomer").value = "",
-    document.getElementById("name").value = "",
-    document.getElementById("birthday").value = "",
-    document.getElementById("gender").value = "",
-    document.getElementById("idCard").value = "",
-    document.getElementById("phoneNumber").value = "",
-    document.getElementById("email").value = "",
-    document.getElementById("address").value = "",
-    document.getElementById("idType").value = ""
     let id = $('#id').val();
     let idCustomer = $('#idCustomer').val();
     let name = $('#name').val();
@@ -43,7 +33,10 @@ function createCustomer() {
         type: "POST",
         data: JSON.stringify(newCustomer),
         url: "/rest-customer",
-        success: successHandler
+        success: successHandler,
+        error: function (e) {
+            document.getElementById("idCustomer").value = e.responseJSON.idCustomer;
+        }
     });
     event.preventDefault();
 }
@@ -65,12 +58,18 @@ function successHandler() {
             document.getElementById("phoneNumber").value = ""
             document.getElementById("email").value = ""
             document.getElementById("address").value = ""
+            $("#create").removeClass("in");
+            $(".modal-backdrop").remove();
+            $("#create").hide();
+
+
         }
     });
 }
 
 function getCustomer(customer) {
-    return `<tr><td>${customer.idCustomer}</td>
+    return `<tr>
+            <td>${customer.idCustomer}</td>
             <td>${customer.name}</td>
             <td>${customer.birthday}</td>
             <td>${customer.gender}</td>
@@ -121,32 +120,8 @@ $(document).ready(function () {
                 document.getElementById("phoneNumber").value = data.phoneNumber,
                 document.getElementById("email").value = data.email,
                 document.getElementById("address").value = data.address,
-                document.getElementById("idType").value = data.customerType.customerTypeId
-                let id = $('#id').val();
-                let idCustomer = $('#idCustomer').val();
-                let name = $('#name').val();
-                let birthday = $('#birthday').val();
-                let gender = $('#gender').val();
-                let idCard = $('#idCard').val();
-                let phoneNumber = $('#phoneNumber').val();
-                let email = $('#email').val();
-                let address = $('#address').val();
-                let idType = $('#idType').val();
-                let newCustomer = {
-                    id: id,
-                    idCustomer: idCustomer,
-                    name: name,
-                    birthday: birthday,
-                    gender: gender,
-                    idCard: idCard,
-                    phoneNumber: phoneNumber,
-                    email: email,
-                    address: address,
-                    deleteStatus: 0,
-                    customerType: {
-                        customerTypeId: idType
-                    }
-                };
+                document.getElementById("idType").value = data.customerType.customerTypeId;
+                console.log($('#create').html());
                 $('#create').modal('show');
             }
         });
@@ -160,27 +135,29 @@ function info(id, name) {
 }
 $(document).ready(function () {
     $("#delete").on("click", ".deleteCustomer", function (event) {
-        debugger
         let id = $('#delete-id').val();
         $.ajax({
             type: "DELETE",
             url: `/rest-customer/${id}`,
             success: function (data) {
-                debugger
                 successHandler()
-                debugger
-                // $('#delete').modal('hide')
                 $("#delete").removeClass("in");
                 $(".modal-backdrop").remove();
                 $("#delete").hide();
-
-                debugger
-                document.getElementById("delete-id").value = ""
-                document.getElementById("delete-name").innerText = ""
             }
         });
     });
 })
 
+function clearInput() {
+    document.getElementById("id").value = ""
+    document.getElementById("idCustomer").value = "",
+    document.getElementById("name").value = "",
+    document.getElementById("birthday").value = "",
+    document.getElementById("idCard").value = "",
+    document.getElementById("phoneNumber").value = "",
+    document.getElementById("email").value = "",
+    document.getElementById("address").value = ""
+}
 
 

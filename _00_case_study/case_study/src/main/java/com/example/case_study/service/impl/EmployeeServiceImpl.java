@@ -1,0 +1,21 @@
+package com.example.case_study.service.impl;
+
+import com.example.case_study.model.employee.Employee;
+import com.example.case_study.repository.employee.EmployeeRepository;
+import com.example.case_study.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+@Service
+public class EmployeeServiceImpl implements EmployeeService {
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @Override
+    public Page<Employee> findAll(Pageable pageable, String name) {
+        return employeeRepository.findAll(pageable, name);
+    }
+}
