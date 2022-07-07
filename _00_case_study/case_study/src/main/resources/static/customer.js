@@ -103,7 +103,6 @@ function searchCustomer() {
 }
 
 $(document).ready(function () {
-    debugger
     $("#customer-list").on("click", ".editCustomer", function (event) {
         let a = $(this);
         let id = a.attr("href");
@@ -111,6 +110,7 @@ $(document).ready(function () {
             type: "GET",
             url: `/rest-customer/${id}`,
             success: function (data) {
+                debugger
                 document.getElementById("id").value = data.id
                 document.getElementById("idCustomer").value = data.idCustomer,
                 document.getElementById("name").value = data.name,
@@ -121,7 +121,7 @@ $(document).ready(function () {
                 document.getElementById("email").value = data.email,
                 document.getElementById("address").value = data.address,
                 document.getElementById("idType").value = data.customerType.customerTypeId;
-                console.log($('#create').html());
+
                 $('#create').modal('show');
             }
         });

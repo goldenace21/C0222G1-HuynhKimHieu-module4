@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="furama.html :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="furama.html :: header"></div>
+<div class="container-fluid bg">
+    <div class="container">
+        <div class="row">
+            <h2 class="mx-auto my-4"><em>Employee management</em></h2>
+        </div>
+        <div class="row d-flex justify-content-between">
+<!--            <div>-->
+<!--                <button id="modal" type="button" class="btn btn-outline-primary btn-sm" onclick="clearInput()" data-toggle="modal" data-target="#create">add new employee</button>-->
+
+<!--                <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--                    <div class="modal-dialog" role="document">-->
+<!--                        <div style="background: rgba(0,0,0,0)" class="modal-content">-->
+<!--                            <div class="modal-header d-flex justify-content-center bg-purple">-->
+<!--                                <h6 class="modal-title text-light" id="exampleModalLabel">Customer form</h6>-->
+<!--                            </div>-->
+<!--                            <div class="modal-body bg-white rounded-bottom">-->
+<!--                                <form id="create-customer">-->
+<!--                                    <input type="hidden" id="id" placeholder="id">-->
+<!--                                    <div class="row d-flex justify-content-around mb-3">-->
+<!--                                        <div class="col-6 pr-0">-->
+<!--                                            <input id="idCustomer" type="text" placeholder="enter id customer" class="form-control form-control-sm">-->
+<!--                                        </div>-->
+<!--                                        <div class="col-6">-->
+<!--                                            <input id="name" type="text" placeholder="enter name" class="form-control form-control-sm">-->
+<!--                                        </div>-->
+<!--                                        <p id="id-error"></p>-->
+<!--                                    </div>-->
+<!--                                    <div class="row d-flex justify-content-around my-3">-->
+<!--                                        <div class="col-12">-->
+<!--                                            <input id="birthday" type="date" placeholder="enter birthday" class="form-control form-control-sm">-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="row d-flex justify-content-around my-3">-->
+<!--                                        <div class="col-6">-->
+<!--                                            <input id="idCard" type="text" placeholder="enter id card" class="form-control form-control-sm">-->
+<!--                                        </div>-->
+<!--                                        <div class="col-6 pl-0">-->
+<!--                                            <input id="phoneNumber" type="text" placeholder="enter phone number" class="form-control form-control-sm">-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="row d-flex justify-content-around">-->
+<!--                                        <div class="col-12">-->
+<!--                                            <div class="form-group">-->
+<!--                                                <select class="form-control form-control-sm" id="gender">-->
+<!--                                                    <option th:value="${true}">male</option>-->
+<!--                                                    <option th:value="${false}">female</option>-->
+<!--                                                </select>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="row d-flex justify-content-around">-->
+<!--                                        <div class="col-6 pr-0">-->
+<!--                                            <input id="email" type="text" placeholder="enter email" class="form-control form-control-sm">-->
+<!--                                        </div>-->
+<!--                                        <div class="col-6">-->
+<!--                                            <input id="address" type="text" placeholder="enter address" class="form-control form-control-sm">-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="row d-flex justify-content-around mt-3">-->
+<!--                                        <div class="col-12">-->
+<!--                                            <div class="form-group">-->
+<!--                                                <select class="form-control form-control-sm" id="idType">-->
+<!--                                                    <option th:each="customerType : ${customerTypes}" th:value="${customerType.customerTypeId}" th:text="${customerType.customerTypeName}"></option>-->
+<!--                                                </select>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="row d-flex justify-content-around">-->
+<!--                                        <div class="col-12">-->
+<!--                                            <input style="width: 100%" type="submit" onclick="createCustomer()" value="submit" class="btn btn-sm bg-purple text-light">-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </form>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div>
+                <form id="search-employee" class="input-group input-group-sm mb-3">
+                    <input id="search-name" style="background: rgba(0,0,0,0)" class="form-control mr-sm-2" type="search" placeholder="Search by name" aria-label="Small">
+                    <input type="button" onclick="searchCustomer()" value="search" class="btn btn-outline-success btn-sm">
+                </form>
+            </div>
+        </div>
+        <div class="row my-3">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Birthday</th>
+                    <th scope="col">Id card</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Divition</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Education</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody id="employee-list">
+                <tr th:each="employee : ${employees}">
+                    <td th:text="${employee.id}"></td>
+                    <td th:text="${employee.name}"></td>
+                    <td th:text="${employee.birthday}"></td>
+                    <td th:text="${employee.idCard}"></td>
+                    <td th:text="${employee.phoneNumber}"></td>
+                    <td th:text="${employee.salary}"></td>
+                    <td th:text="${employee.email}"></td>
+                    <td th:text="${employee.address}"></td>
+                    <td th:text="${employee.division.divisionName}"></td>
+                    <td th:text="${employee.position.positionName}"></td>
+                    <td th:text="${employee.educationDegree.educationDegreeName}"></td>
+                    <td><button th:href="${employee.id}" type="button" class="btn btn-outline-info btn-sm edit-employee">update</button></td>
+                    <td>
+                        <button th:data-id="${employee.id}" th:data-name="${employee.name}" th:onclick="|info(this.getAttribute('data-id'),this.getAttribute('data-name'))|" type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#delete">delete</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row justify-content-end">
+            <div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination-sm">
+                        <li class="page-item">
+                            <a style="background: rgba(0,0,0,0)" class="page-link text-info" th:if="${employees.hasPrevious()}" th:href="@{/employee/(page = ${employees.number - 1},name = ${name})}">Previous</a>
+                        </li>
+                        <li class="page-item" th:each="pageNo: ${#numbers.sequence(0,employees.totalPages - 1)}">
+                            <a style="background: rgba(0,0,0,0)" class="page-link text-info" th:href="@{/employee/(page = ${pageNo},name = ${name})}" th:text="${pageNo}"></a>
+                        </li>
+                        <li class="page-item">
+                            <a style="background: rgba(0,0,0,0)" class="page-link text-info" th:if="${employees.hasNext()}" th:href="@{/employee/(page = ${employees.number +1},name = ${name})}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div style="background: rgba(0,0,0,0)" class="modal-content">
+            <div class="modal-header d-flex justify-content-center bg-purple">
+                <h6 class="modal-title text-light">Confirm</h6>
+            </div>
+            <div class="modal-body bg-white rounded-bottom">
+                <div class="row d-flex justify-content-around">
+                    <input type="hidden" id="delete-id">
+                    <div class="mb-2">
+                        delete customer: <span id="delete-name"></span>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-around mt-2">
+                    <div class="col-3 pr-0">
+                        <input style="width: 100%" type="button" data-dismiss="modal" value="close" class="btn btn-sm bg-secondary text-light">
+                    </div>
+                    <div class="col-9">
+                        <input style="width: 100%" type="button" value="delete" class="btn btn-sm bg-purple text-light deleteCustomer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="furama.html :: script"></div>
+</body>
+</html>

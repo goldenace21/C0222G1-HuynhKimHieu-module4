@@ -50,12 +50,12 @@ insert into user_role(user_name,role_id) value
 ("user2",2),
 ("user3",2);
 
-insert into employee (name,address,birthday,email,id_card,phone_number,salary,division_id,education_degree_id,position_id,user_name) value
-("huu trung","hoi an","2011-03-04","trung@gmail","947938493","0932477587","96.45",1,1,1,"user1"),
-("bao nhi","da nang","2002-05-02","nhi@gmail","74638493","093544234","45.65",2,2,2,"user2"),
-("huynh an","hue","2004-01-12","an@gmail","42345493","0932745323","65.41",3,3,3,"user3"),
-("anh tuyet","daklak","2005-11-02","tuyet@gmail","58635493","09862333","32.41",2,1,4,"user3"),
-("nhu quynh","quang nam","2002-12-14","quynh@gmail","76635434","0984567","87.41",3,2,5,"user1");
+insert into employee (name,address,birthday,email,id_card,phone_number,salary,division_id,education_degree_id,position_id,user_name,delete_status) value
+("huu trung","hoi an","2011-03-04","trung@gmail","947938493","0932477587","96.45",1,1,1,"user1",0),
+("bao nhi","da nang","2002-05-02","nhi@gmail","74638493","093544234","45.65",2,2,2,"user2",0),
+("huynh an","hue","2004-01-12","an@gmail","42345493","0932745323","65.41",3,3,3,"user3",0),
+("anh tuyet","daklak","2005-11-02","tuyet@gmail","58635493","09862333","32.41",2,1,4,"user3",0),
+("nhu quynh","quang nam","2002-12-14","quynh@gmail","76635434","0984567","87.41",3,2,5,"user1",0);
 
 
 

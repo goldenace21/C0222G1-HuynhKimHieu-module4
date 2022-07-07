@@ -18,4 +18,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Page<Employee> findAll(Pageable pageable, String name) {
         return employeeRepository.findAll(pageable, name);
     }
+
+    @Override
+    public Employee save(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+    @Override
+    public Employee findById(Integer id) {
+        return employeeRepository.findById(id).get();
+    }
 }

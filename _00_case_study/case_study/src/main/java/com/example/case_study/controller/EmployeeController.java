@@ -45,6 +45,8 @@ public class EmployeeController {
         model.addAttribute("educationDegrees", educationDegreeRepository.findAll());
         model.addAttribute("divisions", divisionRepository.findAll());
         model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("employees", employees);
+        model.addAttribute("name", name);
         return "/list-employee";
     }
 }
