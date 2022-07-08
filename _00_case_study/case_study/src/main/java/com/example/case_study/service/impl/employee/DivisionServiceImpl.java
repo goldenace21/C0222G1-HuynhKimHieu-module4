@@ -1,8 +1,8 @@
-package com.example.case_study.service.impl;
+package com.example.case_study.service.impl.employee;
 
 import com.example.case_study.model.employee.Division;
 import com.example.case_study.repository.employee.DivisionRepository;
-import com.example.case_study.service.DivisionService;
+import com.example.case_study.service.employee.DivisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

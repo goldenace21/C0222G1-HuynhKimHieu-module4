@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="furama.html :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="furama.html :: header"></div>
+<div class="container-fluid bg">
+    <div class="container">
+        <div class="row">
+            <h2 class="mx-auto my-4"><em>Facility management</em></h2>
+        </div>
+        <div class="row d-flex justify-content-between">
+            <div>
+                <button id="modal" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#create">add new facility</button>
+
+                <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div style="background: rgba(0,0,0,0)" class="modal-content">
+                            <div class="modal-header d-flex justify-content-center bg-purple">
+                                <h6 class="modal-title text-light" id="exampleModalLabel">Facility form</h6>
+                            </div>
+                            <div class="modal-body bg-white rounded-bottom">
+                                <form action="/facility" method="post" id="create-customer" th:object="${facility}">
+                                    <input type="hidden" id="id" placeholder="id">
+                                    <div class="row d-flex justify-content-around mb-3">
+                                        <div class="col-6 pr-0">
+                                            <select class="form-control form-control-sm" id="facilityType" th:field="*{facilityType}">
+                                                <option th:each="facility : ${facilityTypes}" th:value="${facility.id}" th:text="${facility.name}"></option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <input th:field="*{name}" id="name" type="text" placeholder="enter name" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex justify-content-around my-3">
+                                        <div class="col-6">
+                                            <input id="area" th:field="*{area}" type="text" placeholder="enter area" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-6 pl-0">
+                                            <input id="cost" th:field="*{cost}" type="text" placeholder="enter cost" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex justify-content-around my-3">
+                                        <div class="col-6">
+                                            <input id="maxPeople" th:field="*{maxPeople}" type="text" placeholder="enter max people" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-6 pl-0">
+                                            <select th:field="*{rentType}" class="form-control form-control-sm" id="rentType">
+                                                <option th:each="renttype : ${rentTypes}" th:value="${renttype.id}" th:text="${renttype.name}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row d-flex justify-content-around mt-3" id="standardRoom_ok">
+                                        <div class="col-12">
+                                            <input th:field="*{standardRoom}" type="text" placeholder="enter standard room" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+
+                                    <div class="row d-flex justify-content-around mt-3" id="description_ok">
+                                        <div class="col-12">
+                                            <input th:field="*{description}" type="text" placeholder="enter description" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+
+                                    <div class="row d-flex justify-content-around mt-3" id="poolArea_ok">
+                                        <div class="col-12">
+                                            <input th:field="*{poolArea}" type="text" placeholder="enter pool area" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+
+                                    <div class="row d-flex justify-content-around mt-3" id="floorsNumber_ok">
+                                        <div class="col-12">
+                                            <input th:field="*{floorsNumber}" type="text" placeholder="enter floors number" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+
+                                    <div class="row d-flex justify-content-around mt-3" id="facilityFree_ok">
+                                        <div class="col-12">
+                                            <input th:field="*{facilityFree}" type="text" placeholder="enter facility free" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+
+                                    <div class="row d-flex justify-content-around mt-3">
+                                        <div class="col-12">
+                                            <input style="width: 100%" type="submit" onclick="createCustomer()" value="submit" class="btn btn-sm bg-purple text-light">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--            <div>-->
+<!--                <form id="search-customer" class="input-group input-group-sm mb-3">-->
+<!--                    <input id="search-name" style="background: rgba(0,0,0,0)" class="form-control mr-sm-2" type="search" placeholder="Search by name" aria-label="Small">-->
+<!--                    <input type="button" onclick="searchCustomer()" value="search" class="btn btn-outline-success btn-sm">-->
+<!--                </form>-->
+<!--            </div>-->
+        </div>
+
+        <div class="row my-3">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Area</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Max People</th>
+                    <th scope="col">Rent Type</th>
+                    <th scope="col">Standard Room</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Pool Area</th>
+                    <th scope="col">Floor Number</th>
+                    <th scope="col">Facility Free</th>
+                    <th scope="col">Facility type</th>
+                </tr>
+                </thead>
+                <tbody id="facility-list">
+                <tr th:each="facility : ${facilitys}">
+                    <td th:text="${facility.id}"></td>
+                    <td th:text="${facility.name}"></td>
+                    <td th:text="${facility.area}"></td>
+                    <td th:text="${facility.cost}"></td>
+                    <td th:text="${facility.maxPeople}"></td>
+                    <td th:text="${facility.rentType.name}"></td>
+                    <td th:text="${facility.standardRoom}"></td>
+                    <td th:text="${facility.description}"></td>
+                    <td th:text="${facility.poolArea}"></td>
+                    <td th:text="${facility.floorsNumber}"></td>
+                    <td th:text="${facility.facilityFree}"></td>
+                    <td th:text="${facility.facilityType.name}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row justify-content-end">
+            <div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination-sm">
+                        <li class="page-item">
+                            <a style="background: rgba(0,0,0,0)" class="page-link text-info" th:if="${facilitys.hasPrevious()}" th:href="@{/facility/(page = ${facilitys.number - 1})}">Previous</a>
+                        </li>
+                        <li class="page-item" th:each="pageNo: ${#numbers.sequence(0,facilitys.totalPages - 1)}">
+                            <a style="background: rgba(0,0,0,0)" class="page-link text-info" th:href="@{/facility/(page = ${pageNo})}" th:text="${pageNo}"></a>
+                        </li>
+                        <li class="page-item">
+                            <a style="background: rgba(0,0,0,0)" class="page-link text-info" th:if="${facilitys.hasNext()}" th:href="@{/facility/(page = ${facilitys.number +1})}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="furama.html :: script"></div>
+<script>
+    $("#create").on("change", "#facilityType", function () {
+        console.log(this.value);
+        switch (this.value) {
+            case"1":
+                document.getElementById("standardRoom_ok").style.setProperty('display', 'block', 'important');
+                document.getElementById("description_ok").style.setProperty('display', 'block', 'important');
+                document.getElementById("floorsNumber_ok").style.setProperty('display', 'block', 'important');
+                document.getElementById("poolArea_ok").style.setProperty('display', 'block', 'important');
+                document.getElementById("facilityFree_ok").style.setProperty('display', 'none', 'important');
+                break;
+            case"2":
+                document.getElementById("standardRoom_ok").style.setProperty('display', 'block', 'important');
+                document.getElementById("description_ok").style.setProperty('display', 'block', 'important');
+                document.getElementById("floorsNumber_ok").style.setProperty('display', 'block', 'important');
+                document.getElementById("poolArea_ok").style.setProperty('display', 'none', 'important');
+                document.getElementById("facilityFree_ok").style.setProperty('display', 'none', 'important');
+                break;
+            case"3":
+                document.getElementById("standardRoom_ok").style.setProperty('display', 'none', 'important');
+                document.getElementById("description_ok").style.setProperty('display', 'none', 'important');
+                document.getElementById("floorsNumber_ok").style.setProperty('display', 'none', 'important');
+                document.getElementById("poolArea_ok").style.setProperty('display', 'none', 'important');
+                document.getElementById("facilityFree_ok").style.setProperty('display', 'block', 'important');
+                break;
+        }
+    })
+</script>
+</body>
+</html>

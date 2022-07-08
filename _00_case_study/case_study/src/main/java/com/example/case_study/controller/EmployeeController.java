@@ -1,13 +1,11 @@
 package com.example.case_study.controller;
 
-import com.example.case_study.model.customer.Customer;
-import com.example.case_study.model.employee.Division;
 import com.example.case_study.model.employee.Employee;
 import com.example.case_study.repository.employee.DivisionRepository;
 import com.example.case_study.repository.employee.EducationDegreeRepository;
 import com.example.case_study.repository.employee.PositionRepository;
 import com.example.case_study.repository.employee.UserRepository;
-import com.example.case_study.service.EmployeeService;
+import com.example.case_study.service.employee.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

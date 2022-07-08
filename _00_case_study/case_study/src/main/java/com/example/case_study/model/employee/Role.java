@@ -15,7 +15,6 @@ public class Role {
     private String roleName;
 
     @ManyToMany(mappedBy = "userRoleSet")
-    @JsonBackReference
     private Set<User> userSet;
 
     public Role() {

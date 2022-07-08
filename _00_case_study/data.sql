@@ -57,5 +57,21 @@ insert into employee (name,address,birthday,email,id_card,phone_number,salary,di
 ("anh tuyet","daklak","2005-11-02","tuyet@gmail","58635493","09862333","32.41",2,1,4,"user3",0),
 ("nhu quynh","quang nam","2002-12-14","quynh@gmail","76635434","0984567","87.41",3,2,5,"user1",0);
 
+insert into facility_type value 
+(1,"Villa"),
+(2,"House"),
+(3,"Room");
+
+insert into rent_type value 
+(1,"hour"),
+(2,"day"),
+(3,"month"),
+(4,"year");
+
+insert into facility value 
+(1,"23.4","94.45","description","pool","2","12","facility1","12.23","room",1,2,0),
+(2,"45.4","34.45","description","food","5","23","facility2","54.23","room",2,4,0),
+(3,"76.4","23.45","description","pool","4","31","facility3","51.23","room",3,2,0);
+
 
 

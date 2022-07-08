@@ -61,8 +61,6 @@ function successHandler() {
             $("#create").removeClass("in");
             $(".modal-backdrop").remove();
             $("#create").hide();
-
-
         }
     });
 }

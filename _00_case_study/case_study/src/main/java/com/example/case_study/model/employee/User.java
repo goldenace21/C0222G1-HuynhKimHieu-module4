@@ -1,5 +1,6 @@
 package com.example.case_study.model.employee;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -15,14 +16,14 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
+    @JsonBackReference("employee")
     private Set<Employee> employeeSet;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role",
                joinColumns = @JoinColumn(name = "user_name"),
                inverseJoinColumns = @JoinColumn(name = "role_id"))
-    @JsonManagedReference
+    @JsonBackReference("user_role")
     private Set<Role> userRoleSet;
 
     public User() {

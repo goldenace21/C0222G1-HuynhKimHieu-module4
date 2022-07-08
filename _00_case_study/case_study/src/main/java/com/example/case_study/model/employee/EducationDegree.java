@@ -1,5 +1,6 @@
 package com.example.case_study.model.employee;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -15,7 +16,7 @@ public class EducationDegree {
     private String educationDegreeName;
 
     @OneToMany(mappedBy = "educationDegree")
-    @JsonIgnore
+    @JsonBackReference("education_degree")
     private Set<Employee> employeeSet;
 
     public EducationDegree() {
