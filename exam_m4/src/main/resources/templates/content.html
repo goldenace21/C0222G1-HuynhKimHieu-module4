@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="home.html :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="home.html :: header"></div>
+<div class="container-fluid bg">
+    <div class="container">
+        <div class="row">
+            <h2 class="mx-auto my-4"><em>Question management</em></h2>
+        </div>
+        <div class="row d-flex justify-content-between">
+            <div>
+                <a href="/question/create">
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#create">add new question</button>
+                </a>
+            </div>
+            <div>
+                <form id="search-customer" action="/question/search" class="input-group input-group-sm mb-3">
+                    <select style="background: rgba(0,0,0,0)" class="form-control form-control-sm">
+                        <option th:each="item : ${types}" th:text="${item.name}" th:value="${item.id}" name="type"></option>
+                    </select>
+                    <input name="title" style="background: rgba(0,0,0,0)" class="form-control mr-sm-2" type="search" placeholder="Search by title" aria-label="Small">
+                    <input type="submit" value="search" class="btn btn-outline-success btn-sm">
+                </form>
+            </div>
+        </div>
+        <div class="row my-3">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">TIEU DE</th>
+                    <th scope="col">LOAI CAU HOI</th>
+                    <th scope="col">NGAY DANG</th>
+                    <th scope="col">TINH TRANG</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody id="customer-list">
+                <tr th:each="content,loop : ${contents}">
+                    <td th:text="${loop.count}"></td>
+                    <td th:text="${content.title}"></td>
+                    <td th:text="${content.questionType.name}"></td>
+                    <td th:text="${content.dateCreate}"></td>
+                    <td th:if="${content.status == true}">da phan hoi</td>
+                    <td th:if="${content.status == false}">cho phan hoi</td>
+                    <td><button th:href="${content.id}" type="button" class="btn btn-outline-info btn-sm editCustomer">update</button></td>
+                    <td>
+                        <button th:data-id="${content.id}" th:data-name="${content.title}" th:onclick="|info(this.getAttribute('data-id'),this.getAttribute('data-name'))|" type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#delete">delete</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div style="background: rgba(0,0,0,0)" class="modal-content">
+            <div class="modal-header d-flex justify-content-center bg-purple">
+                <h6 class="modal-title text-light">Confirm</h6>
+            </div>
+            <form action="/question/delete" method="get">
+                <div class="modal-body bg-white rounded-bottom">
+                    <div class="row d-flex justify-content-around">
+                        <div class="mb-2">
+                            <center>
+                                delete question: <input id="delete-id" name="id"><br>
+                                name: <input id="delete-name">
+                            </center>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-around mt-2">
+                        <div class="col-3 pr-0">
+                            <input style="width: 100%" type="button" data-dismiss="modal" value="close" class="btn btn-sm bg-secondary text-light">
+                        </div>
+                        <div class="col-9">
+                            <input style="width: 100%" type="submit" value="delete" class="btn btn-sm bg-purple text-light">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:replace="home.html :: script"></div>
+</body>
+<script src="/student.js"></script>
+<script>
+    function info(id, name) {
+        console.log(name)
+        document.getElementById("delete-id").value = id;
+        document.getElementById("delete-name").value = name;
+    }
+</script>
+</html>
